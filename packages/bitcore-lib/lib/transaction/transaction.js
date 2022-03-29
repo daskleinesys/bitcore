@@ -319,8 +319,8 @@ Transaction.prototype.hasWitnesses = function() {
 Transaction.prototype.toBufferWriter = function(writer, noWitness) {
   writer.writeInt32LE(this.version);
 
-  if (this.bcdGarbage != null) {
-    writer.write(this.bcdGargabe);
+  if (this._bcdGarbage != null) {
+    writer.write(this._bcdGarbage);
   }
 
   var hasWitnesses = this.hasWitnesses();
@@ -365,8 +365,8 @@ Transaction.prototype.fromBufferReader = function(reader) {
 
   this.version = reader.readInt32LE();
 
-  if (this.bcdGarbage != null) {
-    reader.read(this.bcdGarbage.length);
+  if (this._bcdGarbage != null) {
+    reader.read(this._bcdGarbage.length);
   }
 
   var sizeTxIns = reader.readVarintNum();
