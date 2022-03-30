@@ -72,6 +72,11 @@ var sighash = function sighash(transaction, sighashType, inputNumber, scriptCode
   var writer = new BufferWriter();
   writer.writeUInt32LE(transaction.version);
 
+  // BCD weirdness
+  if (transaction._bcdGarbage != null) {
+    writer.write(transaction._bcdGarbage);
+  }
+
   // Input prevouts/nSequence (none/all, depending on flags)
   writer.write(hashPrevouts);
   writer.write(hashSequence);
